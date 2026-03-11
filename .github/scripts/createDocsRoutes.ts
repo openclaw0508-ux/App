@@ -188,18 +188,15 @@ function run() {
     const travelArticleHubs = fs.readdirSync(`${docsDir}/articles/${platformNames.travel}`);
     const consolidatedArticleHubs = fs.readdirSync(`${docsDir}/articles/${platformNames.consolidated}`);
 
-
     const expensifyClassicRoute = routes.platforms.find((platform) => platform.href === platformNames.expensifyClassic);
     const newExpensifyRoute = routes.platforms.find((platform) => platform.href === platformNames.newExpensify);
     const travelRoute = routes.platforms.find((platform) => platform.href === platformNames.travel);
-    const consolidatedRoute = routes.platforms.find(
-    (platform) => platform.href === platformNames.consolidated
-);
+    const consolidatedRoute = routes.platforms.find((platform) => platform.href === platformNames.consolidated);
 
     if (!consolidatedRoute) {
-    console.error('Consolidated platform missing from _routes.yml');
-    process.exit(1);
-}
+        console.error('Consolidated platform missing from _routes.yml');
+        process.exit(1);
+    }
     if (expensifyClassicArticleHubs.length !== expensifyClassicRoute?.hubs.length) {
         console.error(warnMessage(platformNames.expensifyClassic));
         process.exit(1);
@@ -218,7 +215,7 @@ function run() {
     if (consolidatedArticleHubs.length !== consolidatedRoute?.hubs.length) {
         console.error(warnMessage(platformNames.consolidated));
         process.exit(1);
-}
+    }
 
     createHubsWithArticles(expensifyClassicArticleHubs, platformNames.expensifyClassic, expensifyClassicRoute.hubs);
     createHubsWithArticles(newExpensifyArticleHubs, platformNames.newExpensify, newExpensifyRoute.hubs);
